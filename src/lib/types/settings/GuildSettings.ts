@@ -29,6 +29,7 @@ export namespace GuildSettings {
 		export const Private = 'roles.private';
 		export const Trusted = 'roles.trusted';
 		export const GiveTrustedRoleOn = 'roles.giveTrustedRoleOn';
+		export const NoLevels = 'roles.noLevels';
 	}
 
 	export namespace Music {

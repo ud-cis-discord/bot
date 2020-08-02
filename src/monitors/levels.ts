@@ -1,5 +1,5 @@
 import { Monitor, MonitorStore, KlasaMessage } from 'klasa';
-import { Message, TextChannel } from 'discord.js';
+import { Message, TextChannel, GuildMember } from 'discord.js';
 import { GuildSettings } from '@lib/types/settings/GuildSettings';
 
 export default class extends Monitor {
@@ -9,6 +9,8 @@ export default class extends Monitor {
 	}
 
 	public async run(msg: KlasaMessage): Promise<Message | void> {
+		if(msg.member.roles.cache.has(msg.guild.settings.get(GuildSettings.Roles.NoLevels))) return;
+
 		const levels: Levels[] =  msg.guild.settings.get(GuildSettings.Levels);
 
 		if(levels.filter(u => u.user == msg.author.id).length == 0) {
@@ -21,7 +23,7 @@ export default class extends Monitor {
 		}
 
 		const _level = levels.filter(u => u.user === msg.author.id)[0];
-		msg.channel.send(`User: ${_level.user} has sent ${_level.level} messages.`);
+		msg.channel.send(`User: ${msg.guild.members.cache.get(_level.user).displayName} has sent ${_level.level} messages.`);
 		return;
 	}
 
