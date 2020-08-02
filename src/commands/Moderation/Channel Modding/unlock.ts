@@ -8,6 +8,7 @@ export default class extends SteveCommand {
 	public constructor(store: CommandStore, file: string[], directory: string) {
 		super(store, file, directory, {
 			description: 'Unlocks a channel.',
+			aliases: ['unyeet'],
 			examples: ['unlock'],
 			permissionLevel: PermissionLevels.MODERATOR,
 			requiredPermissions: ['MANAGE_CHANNELS'],
