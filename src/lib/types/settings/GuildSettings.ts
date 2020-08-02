@@ -10,6 +10,7 @@ export namespace GuildSettings {
 	export const Prefix = 'prefix';
 	export const Snippets = 'snippets';
 	export const WordBlacklist = 'wordBlacklist';
+	export const Levels = 'levels';
 
 	export namespace Channels {
 		export const Memberlog = 'channels.memberlog';
