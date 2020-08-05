@@ -1,6 +1,7 @@
 import { Monitor, MonitorStore, KlasaMessage } from 'klasa';
-import { Message, TextChannel, GuildMember } from 'discord.js';
+import { Message, TextChannel } from 'discord.js';
 import { GuildSettings } from '@lib/types/settings/GuildSettings';
+import { Levels } from '@lib/types/levels';
 
 export default class extends Monitor {
 
@@ -13,7 +14,7 @@ export default class extends Monitor {
 		const noLevelchan : TextChannel[] = msg.guild.settings.get(GuildSettings.Channels.NoLevles);
 		if(noLevelchan.filter(c => c == msg.channel).length > 0) return;
 
-		const levels: Levels[] =  msg.guild.settings.get(GuildSettings.Levels);
+		const levels: Levels[] = msg.guild.settings.get(GuildSettings.Levels);
 
 		if(levels.filter(u => u.user == msg.author.id).length == 0) {
 			const newUser : Levels = { user: msg.author.id, level: 1 };
@@ -25,13 +26,8 @@ export default class extends Monitor {
 		}
 
 		const _level = levels.filter(u => u.user === msg.author.id)[0];
-		msg.channel.send(`User: ${msg.guild.members.cache.get(_level.user).displayName} has sent ${_level.level} messages.`);
+		//msg.channel.send(`User: ${msg.guild.members.cache.get(_level.user).displayName} has sent ${_level.level} messages.`);
 		return;
 	}
 
-}
-
-interface Levels{
-	user: string;
-	level: number;
 }
