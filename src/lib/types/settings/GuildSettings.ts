@@ -17,6 +17,7 @@ export namespace GuildSettings {
 		export const Modlog = 'channels.modlog';
 		export const ReminderChannel = 'channels.reminderChannel';
 		export const Serverlog = 'channels.serverlog';
+		export const NoLevles = 'channels.noLevels';
 	}
 
 	export namespace Roles {

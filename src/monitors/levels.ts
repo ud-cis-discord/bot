@@ -10,6 +10,8 @@ export default class extends Monitor {
 
 	public async run(msg: KlasaMessage): Promise<Message | void> {
 		if(msg.member.roles.cache.has(msg.guild.settings.get(GuildSettings.Roles.NoLevels))) return;
+		const noLevelchan : TextChannel[] = msg.guild.settings.get(GuildSettings.Channels.NoLevles);
+		if(noLevelchan.filter(c => c == msg.channel).length > 0) return;
 
 		const levels: Levels[] =  msg.guild.settings.get(GuildSettings.Levels);
 
