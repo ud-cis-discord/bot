@@ -23,10 +23,9 @@ export default class extends Monitor {
 			const levelsClone = levels.slice();
 			const index = levelsClone.map(u => u.user).indexOf(msg.author.id);
 			levelsClone[index].level++;
+			await msg.guild.settings.update(GuildSettings.Levels, levelsClone, { action: 'overwrite' });
 		}
-
-		const _level = levels.filter(u => u.user === msg.author.id)[0];
-		//msg.channel.send(`User: ${msg.guild.members.cache.get(_level.user).displayName} has sent ${_level.level} messages.`);
+		
 		return;
 	}
 

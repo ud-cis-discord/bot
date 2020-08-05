@@ -9,7 +9,8 @@ export default class extends SteveCommand {
 	public constructor(store: CommandStore, file: string[], directory: string) {
 		super(store, file, directory, {
 			description: 'Lets you check your level',
-			aliases: ['check']
+			aliases: ['check'],
+			runIn: ['text']
 		});
 	}
 
@@ -17,7 +18,7 @@ export default class extends SteveCommand {
 		const levels: Levels[] = msg.guild.settings.get(GuildSettings.Levels);
 		if(levels.filter(u => u.user == msg.author.id).length == 0) {
 			return msg.channel.send('It looks like you have no levels');
-		}return msg.channel.send(`You have ${levels[levels.slice().map(u => u.user).indexOf(msg.author.id)].level} levels`);
+		} return msg.channel.send(`You have ${levels[levels.slice().map(u => u.user).indexOf(msg.author.id)].level} levels`);
 
 	}
 
