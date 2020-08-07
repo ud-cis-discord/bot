@@ -1,6 +1,6 @@
 import { SteveCommand } from '@lib/structures/commands/SteveCommand';
 import { CommandStore, KlasaMessage } from 'klasa';
-import {  Message } from 'discord.js';
+import { Message } from 'discord.js';
 import { PermissionLevels } from '@lib/types/enums';
 import { Levels } from '@lib/types/levels';
 import { GuildSettings } from '@lib/types/settings/GuildSettings';
@@ -11,7 +11,7 @@ export default class extends SteveCommand {
 	public constructor(store: CommandStore, file: string[], directory: string) {
 		super(store, file, directory, {
 			description: 'Resets a users levels',
-			aliases: ['export', 'getcsv'],
+			aliases: ['export', 'getcsv', 'report'],
 			permissionLevel: PermissionLevels.ADMINISTRATOR,
 			runIn: ['text']
 		});

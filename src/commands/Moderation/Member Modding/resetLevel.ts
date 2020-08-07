@@ -44,7 +44,7 @@ export default class extends SteveCommand {
 			await msg.guild.settings.update(GuildSettings.Levels, levelsClone, { action: 'overwrite' });
 		}
 
-		return msg.channel.send(`Reseting ${targetMember.displayName} to ${endLevel}`);	
+		return msg.channel.send(`Resetting ${targetMember.displayName} to ${endLevel}`);	
 	}
 
 }

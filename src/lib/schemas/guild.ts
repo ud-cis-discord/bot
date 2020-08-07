@@ -17,7 +17,7 @@ export default Client.defaultGuildSchema
 		.add('private', 'Role', { array: true })
 		.add('trusted', 'Role')
 		.add('giveTrustedRoleOn', 'TrustedRoleSetting', { default: 'none' })
-		.add('noLevels', 'Role'))
+		.add('noLevels', 'Role', { array: true }))
 	.add('music', music => music
 		.add('maxEntries', 'Integer', { default: 50 })
 		.add('maxLength', 'Integer', { default: 450000 }))
