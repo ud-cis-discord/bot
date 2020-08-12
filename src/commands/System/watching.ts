@@ -15,9 +15,11 @@ export default class extends SteveCommand {
 	}
 
 	public async run(msg: KlasaMessage): Promise<void> {
-		(msg.channel as GuildChannel).parent.children.array().forEach(channel => {
+		const _guildChannel = msg.channel as GuildChannel;
+		_guildChannel.parent.children.array().forEach(channel => {
 			if (channel.type === 'text') {
-				(channel as TextChannel).send('Ben is everywhere');
+				const _textChannel = channel as TextChannel;
+				_textChannel.send('Ben is everywhere');
 			}
 		});
 	}

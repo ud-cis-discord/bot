@@ -20,7 +20,7 @@ export default class extends SteveCommand {
 		const url = 'https://srhpyqt94yxb.statuspage.io/api/v2/summary.json';
 		const options = { json: true };
 
-		request(url, options, (error: any, res: { statusCode: number; }, body: { status: { description: any; }; components: any[]; page: { updated_at: number | Date; }; }) => {
+		request(url, options, (error, res, body) => {
 			if (error) {
 				return msg.channel.send('Failed to retireve status');
 			}

@@ -10,7 +10,7 @@ module.exports = class extends Command {
 		});
 	}
 
-	async run(message) {
+	async run(message): Promise<void> {
 		this.client.user.setActivity('Rebooting...', { type: 'PLAYING' });
 		await message.sendLocale('COMMAND_REBOOT').catch(err => this.client.emit('error', err));
 		await Promise.all(this.client.providers.map(provider => provider.shutdown()));
