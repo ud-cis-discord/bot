@@ -16,10 +16,9 @@ export default class extends SteveCommand {
 
 	public async run(msg: KlasaMessage): Promise<Message> {
 		const levels: Levels[] = msg.guild.settings.get(GuildSettings.Levels);
-		if(levels.filter(u => u.user == msg.author.id).length == 0) {
+		if (levels.filter(level => level.user === msg.author.id).length === 0) {
 			return msg.channel.send('It looks like you have no levels');
-		} return msg.channel.send(`You have ${levels[levels.slice().map(u => u.user).indexOf(msg.author.id)].level} levels`);
-
+		} return msg.channel.send(`You have ${levels[levels.slice().map(level => level.user).indexOf(msg.author.id)].level} levels`);
 	}
 
 }

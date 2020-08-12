@@ -19,14 +19,14 @@ export default class extends SteveCommand {
 
 	public async run(msg: KlasaMessage): Promise<Message> {
 		const levels: Levels[] = msg.guild.settings.get(GuildSettings.Levels);
-		let buff: string = 'Display name,Messages sent,Roles\n';
+		let buff = 'Display name,Messages sent,Roles\n';
 		levels.forEach(level => {
 			buff += `${msg.guild.members.cache.get(level.user).displayName},${level.level},"`;
-			msg.guild.members.cache.get(level.user).roles.cache.array().forEach(role => { buff += `${role.name}, `} );
+			msg.guild.members.cache.get(level.user).roles.cache.array().forEach(role => { buff += `${role.name}, `; });
 			buff += '"\n';
 		});
 
-		return msg.channel.sendFile(Buffer.from(buff),`export_${formatDate(Date.now(), 'M-D-YY_HH-mm-ss')}.csv`,'Don\'t forget to reset all levels');
+		return msg.channel.sendFile(Buffer.from(buff), `export_${formatDate(Date.now(), 'M-D-YY_HH-mm-ss')}.csv`, 'Don\'t forget to reset all levels');
 	}
 
 }

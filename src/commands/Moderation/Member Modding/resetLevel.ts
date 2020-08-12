@@ -22,29 +22,33 @@ export default class extends SteveCommand {
 	public async run(msg: KlasaMessage, [targetMember, resetTo]: [GuildMember, number]): Promise<Message> {
 		const levels: Levels[] = msg.guild.settings.get(GuildSettings.Levels);
 
-		let startLevel: number = 0;
-		if(levels.filter(u => u.user == targetMember.id).length > 0) {
-			startLevel = levels[levels.slice().map(u => u.user).indexOf(targetMember.id)].level
+		let startLevel = 0;
+		if (levels.filter(level => level.user === targetMember.id).length > 0) {
+			startLevel = levels[levels.slice().map(level => level.user).indexOf(targetMember.id)].level;
 		}
 
-		let endLevel : number = 0;
-		if(resetTo > 0)
+		let endLevel = 0;
+		if (resetTo > 0) {
 			endLevel = resetTo;
-		else if (resetTo < 0)
+		} else if (resetTo < 0) {
 			endLevel = startLevel + resetTo;
-		(endLevel < 0) ? endLevel = 0 : endLevel = endLevel;
+		}
 
-		if(levels.filter(u => u.user == targetMember.id).length == 0) {
-			const newUser : Levels = { user: targetMember.id, level: endLevel };
+		if (endLevel < 0) {
+			endLevel = 0;
+		}
+
+		if (levels.filter(level => level.user === targetMember.id).length === 0) {
+			const newUser: Levels = { user: targetMember.id, level: endLevel };
 			await msg.guild.settings.update(GuildSettings.Levels, newUser, { action: 'add' });
 		} else {
 			const levelsClone = levels.slice();
-			const index = levelsClone.map(u => u.user).indexOf(targetMember.id);
+			const index = levelsClone.map(level => level.user).indexOf(targetMember.id);
 			levelsClone[index].level = endLevel;
 			await msg.guild.settings.update(GuildSettings.Levels, levelsClone, { action: 'overwrite' });
 		}
 
-		return msg.channel.send(`Resetting ${targetMember.displayName} to ${endLevel}`);	
+		return msg.channel.send(`Resetting ${targetMember.displayName} to ${endLevel}`);
 	}
 
 }

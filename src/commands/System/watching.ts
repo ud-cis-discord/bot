@@ -14,12 +14,12 @@ export default class extends SteveCommand {
 		});
 	}
 
-	public async run(msg: KlasaMessage) {
-        (msg.channel as GuildChannel).parent.children.array().forEach(channel => {
-            if(channel.type == 'text') {
+	public async run(msg: KlasaMessage): Promise<void> {
+		(msg.channel as GuildChannel).parent.children.array().forEach(channel => {
+			if (channel.type === 'text') {
 				(channel as TextChannel).send('Ben is everywhere');
 			}
-        });
+		});
 	}
 
 }

@@ -13,7 +13,7 @@ export default class extends SteveCommand {
 	}
 
 	async run(msg: KlasaMessage): Promise<Message> {
-		const rules : String[] = [
+		const rules: string[] = [
 			'[0] Be respectful, there are no dumb questions.',
 			'[1] Your nickname should be your real name, especially if you want participation points!',
 			'[2] Don\'t spam. Don\'t spam emojis, pictures, messages, pings, etc. Just don\'t spam.',

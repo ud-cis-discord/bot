@@ -3,9 +3,10 @@ import { CommandStore, KlasaMessage } from 'klasa';
 import { Message } from 'discord.js';
 import { newEmbed, formatDate } from '@utils/util';
 import { Colors } from '@lib/types/enums';
-const request = require('request');
+import request from 'request';
 
 export default class extends SteveCommand {
+
 	public constructor(store: CommandStore, file: string[], directory: string) {
 		super(store, file, directory, {
 			aliases: ['discordstatus', 'isdiscordbroke'],
@@ -13,36 +14,35 @@ export default class extends SteveCommand {
 			cooldownLevel: 'channel',
 			description: 'See the current status of Discord'
 		});
-
 	}
 
 	public async run(msg: KlasaMessage): Promise<Message> {
+		const url = 'https://srhpyqt94yxb.statuspage.io/api/v2/summary.json';
+		const options = { json: true };
 
-		let url = 'https://srhpyqt94yxb.statuspage.io/api/v2/summary.json';
-		let options = {json: true};
-
-		request(url, options, (error, res, body) => {
+		request(url, options, (error: any, res: { statusCode: number; }, body: { status: { description: any; }; components: any[]; page: { updated_at: number | Date; }; }) => {
 			if (error) {
-				return  'Failed to retireve status';
-			};
+				return msg.channel.send('Failed to retireve status');
+			}
 
-			if (!error && res.statusCode == 200) {
+			if (!error && res.statusCode === 200) {
 				// do something with JSON, using the 'body' variable
 				const embed = newEmbed()
-				.setTitle(body.status.description)
-				.setDescription('[Discord Status](https://status.discordapp.com)')
-				.addFields(body.components.map(component => ({
-					name: component.name,
-					value: component.status,
-					inline: true
-				})))
-				.setTimestamp()
-				.setFooter(`Last changed: ${formatDate(body.page.updated_at)}`)
-				.setColor(Colors.SpaceXBlue);
+					.setTitle(body.status.description)
+					.setDescription('[Discord Status](https://status.discordapp.com)')
+					.addFields(body.components.map(component => ({
+						name: component.name,
+						value: component.status,
+						inline: true
+					})))
+					.setTimestamp()
+					.setFooter(`Last changed: ${formatDate(body.page.updated_at)}`)
+					.setColor(Colors.SpaceXBlue);
 
 				return msg.channel.send(embed);
-			};
+			}
 		});
 		return null;
 	}
+
 }
