@@ -24,7 +24,7 @@ export default class extends SteveCommand {
 			'[7] Respect what the Staff and Admins say, if they tell you to stop, then stop. '
 		];
 		msg.delete();
-		msg.channel.send('**The Rules**');
+		await msg.channel.send({ files: [{ attachment: './assets/images/rules.png', name: 'rules.png' }] });
 		return msg.sendCode('ini', rules.join('\n'));
 	}
 
