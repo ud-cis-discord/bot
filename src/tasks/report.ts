@@ -10,11 +10,13 @@ export default class extends Task {
 		const _channel  = this.client.channels.cache.get(channel) as TextChannel;
 		const _guild = _channel.guild;
 		const levels: Levels[] = _guild.settings.get(GuildSettings.Levels);
-		let buff: string = 'Display name,Messages sent\n';
+		let buff: string = 'Display name,Messages sent,Roles\n';
 		levels.forEach(level =>{
 			buff += `${_guild.members.cache.get(level.user).displayName},${level.level}\n`;
+			_guild.members.cache.get(level.user).roles.cache.array().forEach(role => { buff += `${role.name}, `} );
+			buff += '"\n';
 		});
-		const out = _channel.sendFile(Buffer.from(buff),`export_${formatDate(Date.now(), 'M-D-YY_HH-mm-ss')}.csv`);
+		const out = _channel.sendFile(Buffer.from(buff),`export_${formatDate(Date.now(), 'M-D-YY_HH-mm-ss')}.csv`, 'All levels have been reset');
 		await _guild.settings.reset(GuildSettings.Levels);
 		return out;
 	}

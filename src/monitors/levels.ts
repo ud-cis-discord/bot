@@ -1,5 +1,5 @@
 import { Monitor, MonitorStore, KlasaMessage } from 'klasa';
-import { Message, TextChannel, DMChannel, Role } from 'discord.js';
+import { TextChannel, DMChannel } from 'discord.js';
 import { GuildSettings } from '@lib/types/settings/GuildSettings';
 import { Levels } from '@lib/types/levels';
 
@@ -10,14 +10,16 @@ export default class extends Monitor {
 	}
 
 	public async run(msg: KlasaMessage): Promise<void> {
+		if(msg.command != null) return;
+
 		if(msg.channel instanceof DMChannel) return;
 		const noLevelRole = await msg.guild.settings.get(GuildSettings.Roles.NoLevels);
-		//msg.channel.send(noLevelRole.join(', '));
-		//if(noLevelRole.filter(r => msg.member.roles.cache.has(r.id)).length > 0 ) return;
-		//msg.channel.send(msg.member.roles.cache.array().join(', '));
-		if(noLevelRole.filter(r => msg.member.roles.cache.has(r)).length > 0) return;
+
+		if(noLevelRole.filter((r: string) => msg.member.roles.cache.has(r)).length > 0) return;
+
 		const noLevelchan : TextChannel[] = msg.guild.settings.get(GuildSettings.Channels.NoLevles);
 		if(noLevelchan.filter(c => c == msg.channel).length > 0) return;
+
 
 		const levels: Levels[] = msg.guild.settings.get(GuildSettings.Levels);
 
