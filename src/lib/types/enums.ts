@@ -17,15 +17,15 @@ export const enum Colors {
 }
 
 export const enum Emojis {
-	Check = '<:check:688203285508653111>',
-	RedX = '<:red_x:688365693485187072>',
-	Empty = '<:empty:688366556186804256>',
-	Skip = '<:skip:688467613831266360>',
-	Plus = '<:plus:693881818675675136>',
-	Minus = '<:minus:693881833007611996>',
-	StevePeace = '<:steve_peace:693645703750352956>',
-	SteveFaceLight = '<:steve_face_lightblue:693645748260044811>',
-	SteveFaceDark = '<:steve_face_darkblue:693645780048937041>'
+	Check = '✅',
+	RedX = '❌',
+	Empty = '⛔',
+	Skip = '⏭️',
+	Plus = '➕',
+	Minus = '➖',
+	StevePeace = '✔️',
+	SteveFaceLight = '✔️',
+	SteveFaceDark = '✔️'
 }
 
 export const enum Events {

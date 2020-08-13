@@ -15,7 +15,6 @@ export default class extends SteveCommand {
 			runIn: ['text'],
 			usage: '[member:membername]',
 			helpUsage: 'member'
-			
 		});
 		this.createCustomResolver('membername', (str, possible, msg) => {
 			const arg = this.client.arguments.get('membername');
@@ -29,9 +28,9 @@ export default class extends SteveCommand {
 		const fetchedMember = await msg.guild.members.fetch(targetMember);
 
 		const levels: Levels[] = msg.guild.settings.get(GuildSettings.Levels);
-		if (levels.filter(level => level.user === targetMember.id).length === 0) {
-			return msg.channel.send(`It looks like ${targetMember.displayName} has sent no messages`);
-		} return msg.channel.send(`${targetMember.displayName} has sent ${levels[levels.slice().map(level => level.user).indexOf(targetMember.id)].level} messages`);
+		if (levels.filter(level => level.user === fetchedMember.id).length === 0) {
+			return msg.channel.send(`It looks like ${fetchedMember.displayName} has sent no messages`);
+		} return msg.channel.send(`${fetchedMember.displayName} has sent ${levels[levels.slice().map(level => level.user).indexOf(fetchedMember.id)].level} messages`);
 	}
 
 }
