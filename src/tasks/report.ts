@@ -12,7 +12,7 @@ export default class extends Task {
 		const levels: Levels[] = _guild.settings.get(GuildSettings.Levels);
 		let buff = 'Display name,Messages sent,Roles\n';
 		levels.forEach(level => {
-			buff += `${_guild.members.cache.get(level.user).displayName},${level.level}\n`;
+			buff += `${_guild.members.cache.get(level.user).displayName},${level.level},"`;
 			_guild.members.cache.get(level.user).roles.cache.array().forEach(role => { buff += `${role.name}, `; });
 			buff += '"\n';
 		});
