@@ -19,7 +19,7 @@ export default class extends Monitor {
 
 		if (filtered) {
 			return msg.delete().then(() => {
-				msg.reply('you used a word that is on the word blacklist. Please refrain from doing that again.');
+				msg.reply('you used a word that is on the word restricted list. Please refrain from doing that again.');
 			});
 		}
 
