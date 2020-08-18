@@ -15,7 +15,6 @@ export default class extends SteveCommand {
 			usage: '<name:string> <email:string> <udid:string>',
 			helpUsage: 'Name | Email | UDID'
 		});
-
 	}
 
 	public async run(msg: KlasaMessage, [name, email, udid]: [string, string, string]): Promise<Message> {

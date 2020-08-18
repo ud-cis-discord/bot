@@ -3,6 +3,7 @@ import { Message, TextChannel } from 'discord.js';
 import { Levels } from '@lib/types/levels';
 import { GuildSettings } from '@lib/types/settings/GuildSettings';
 import { formatDate } from '@lib/util/util';
+import { UserSettings } from '@lib/types/settings/UserSettings';
 
 export default class extends Task {
 
@@ -10,9 +11,12 @@ export default class extends Task {
 		const _channel = this.client.channels.cache.get(channel) as TextChannel;
 		const _guild = _channel.guild;
 		const levels: Levels[] = _guild.settings.get(GuildSettings.Levels);
-		let buff = 'Display name,Messages sent,Roles\n';
+		
+		let buff = 'Name,Display name,Messages sent,Email,UDID,Roles\n';
 		levels.forEach(level => {
-			buff += `${_guild.members.cache.get(level.user).displayName},${level.level},"`;
+			const member = _guild.members.cache.get(level.user);
+			buff += `${member.user.settings.get(UserSettings.Details.Name)},${member.displayName},${level.level},` +
+			`${member.user.settings.get(UserSettings.Details.Email)},${member.user.settings.get(UserSettings.Details.UDID)},"`;
 			_guild.members.cache.get(level.user).roles.cache.array().forEach(role => { buff += `${role.name}, `; });
 			buff += '"\n';
 		});

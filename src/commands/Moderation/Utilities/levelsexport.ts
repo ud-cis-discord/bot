@@ -5,12 +5,13 @@ import { PermissionLevels } from '@lib/types/enums';
 import { Levels } from '@lib/types/levels';
 import { GuildSettings } from '@lib/types/settings/GuildSettings';
 import { formatDate } from '@lib/util/util';
+import { UserSettings } from '@lib/types/settings/UserSettings';
 
 export default class extends SteveCommand {
 
 	public constructor(store: CommandStore, file: string[], directory: string) {
 		super(store, file, directory, {
-			description: 'Resets a users levels',
+			description: 'Generates a report of user messages',
 			aliases: ['export', 'getcsv', 'report'],
 			permissionLevel: PermissionLevels.ADMINISTRATOR,
 			runIn: ['text']
@@ -19,9 +20,11 @@ export default class extends SteveCommand {
 
 	public async run(msg: KlasaMessage): Promise<Message> {
 		const levels: Levels[] = msg.guild.settings.get(GuildSettings.Levels);
-		let buff = 'Display name,Messages sent,Roles\n';
+		let buff = 'Name,Display name,Messages sent,Email,UDID,Roles\n';
 		levels.forEach(level => {
-			buff += `${msg.guild.members.cache.get(level.user).displayName},${level.level},"`;
+			const member = msg.guild.members.cache.get(level.user);
+			buff += `${member.user.settings.get(UserSettings.Details.Name)},${member.displayName},${level.level},` +
+			`${member.user.settings.get(UserSettings.Details.Email)},${member.user.settings.get(UserSettings.Details.UDID)},"`;
 			msg.guild.members.cache.get(level.user).roles.cache.array().forEach(role => { buff += `${role.name}, `; });
 			buff += '"\n';
 		});
