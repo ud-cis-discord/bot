@@ -13,4 +13,10 @@ export namespace UserSettings {
 		export const WorkTime = 'pomodoro.workTime';
 	}
 
+	export namespace Details {
+		export const Name = 'details.name';
+		export const Email = 'details.email';
+		export const UDID = 'details.udid';
+	}
+
 }

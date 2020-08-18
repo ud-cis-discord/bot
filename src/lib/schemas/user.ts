@@ -9,4 +9,8 @@ export default Client.defaultUserSchema
 		.add('running', 'Boolean', { configurable: false, default: false })
 		.add('shortBreakTime', 'Integer', { default: 5 * Time.Minute })
 		.add('workRoundNumber', 'Integer', { configurable: false, default: 0 })
-		.add('workTime', 'Integer', { default: 25 * Time.Minute }));
+		.add('workTime', 'Integer', { default: 25 * Time.Minute }))
+	.add('details', det => det
+		.add('name', 'String', { configurable: false })
+		.add('email', 'String', { configurable: false })
+		.add('udid', 'String', { configurable: false }));
