@@ -1,4 +1,5 @@
 import { Language, LanguageStore, util } from 'klasa';
+import { NAME } from '@root/config'
 
 export default class extends Language {
 
@@ -118,7 +119,7 @@ export default class extends Language {
 			],
 			COMMAND_INVITE_DESCRIPTION: 'Displays the invite link of the bot, to invite it to your guild.',
 			COMMAND_INFO: [
-				`${this.client.user.username} is a bot built on top of the Klasa framework and the Discord.js library.`,
+				`${NAME} is a bot built on top of the Klasa framework and the Discord.js library.`,
 				'The bot is custom-coded and is actively maintained by Ben Segal and biased on Steve Bot.',
 				'',
 				'Some features of Steve include:',
@@ -129,7 +130,7 @@ export default class extends Language {
 				'',
 				'Let us know if you have any issues! We try to fix bugs as soon as possible and are still adding new features.',
 				'',
-				`If you're interested in how ${this.client.user.username} works, you can check the code out at <https://github.com/ud-cis-discord/bot>.`
+				`If you're interested in how ${NAME} works, you can check the code out at <https://github.com/ud-cis-discord/bot>.`
 			],
 			COMMAND_INFO_DESCRIPTION: 'Provides some information about this bot.',
 			COMMAND_HELP_DESCRIPTION: 'Display help for a command.',

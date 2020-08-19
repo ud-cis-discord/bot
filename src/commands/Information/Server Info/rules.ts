@@ -10,7 +10,8 @@ export default class extends SteveCommand {
 			aliases: ['rule'],
 			runIn: ['text'],
 			subcommands: true,
-			usage: '<all|view:default> (number:number)'
+			usage: '<all|view:default> (number:number)',
+			helpUsage: 'rule number'
 		});
 		this
 			.createCustomResolver('number', (num, possible, msg, [action]) => action !== 'all' ? num : null);
