@@ -1,4 +1,4 @@
-mport { SteveCommand } from '@lib/structures/commands/SteveCommand';
+import { SteveCommand } from '@lib/structures/commands/SteveCommand';
 import { CommandStore, KlasaMessage } from 'klasa';
 import { Message } from 'discord.js';
 

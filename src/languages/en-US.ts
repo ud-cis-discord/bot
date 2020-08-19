@@ -129,7 +129,7 @@ export default class extends Language {
 				'',
 				'Let us know if you have any issues! We try to fix bugs as soon as possible and are still adding new features.',
 				'',
-				`If you\'re interested in how ${this.client.user.username} works, you can check the code out at <https://github.com/ud-cis-discord/bot>.`
+				`If you're interested in how ${this.client.user.username} works, you can check the code out at <https://github.com/ud-cis-discord/bot>.`
 			],
 			COMMAND_INFO_DESCRIPTION: 'Provides some information about this bot.',
 			COMMAND_HELP_DESCRIPTION: 'Display help for a command.',

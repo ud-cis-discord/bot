@@ -11,7 +11,7 @@ export default class extends Task {
 		const _channel = this.client.channels.cache.get(channel) as TextChannel;
 		const _guild = _channel.guild;
 		const levels: Levels[] = _guild.settings.get(GuildSettings.Levels);
-		
+
 		let buff = 'Name,Display name,Messages sent,Email,UDID,Roles\n';
 		levels.forEach(level => {
 			const member = _guild.members.cache.get(level.user);
