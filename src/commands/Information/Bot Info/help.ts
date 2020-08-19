@@ -10,7 +10,7 @@ export default class extends SteveCommand {
 
 	public constructor(store: CommandStore, file: string[], directory: string) {
 		super(store, file, directory, {
-			aliases: ['commands', 'howthefuckdoiusethisbot'],
+			aliases: ['commands', 'howtheheckdoiusethisbot'],
 			guarded: true,
 			description: `Shows info about ${NAME}'s commands.`,
 			examples: ['help', 'help roll'],

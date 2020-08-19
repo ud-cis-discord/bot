@@ -12,7 +12,7 @@ export default class extends SteveCommand {
 	public constructor(store: CommandStore, file: string[], directory: string) {
 		super(store, file, directory, {
 			description: 'Generates a report of user messages',
-			aliases: ['export', 'getcsv', 'report'],
+			aliases: ['export', 'getcsv'],
 			permissionLevel: PermissionLevels.ADMINISTRATOR,
 			runIn: ['text']
 		});
