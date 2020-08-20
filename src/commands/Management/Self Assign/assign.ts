@@ -1,8 +1,10 @@
 import { SteveCommand } from '@lib/structures/commands/SteveCommand';
 import { CommandStore, KlasaMessage } from 'klasa';
-import { PermissionLevels, Emojis } from '@lib/types/enums';
-import { Role, Message, Snowflake } from 'discord.js';
+import { PermissionLevels, Emojis, Colors } from '@lib/types/enums';
+import { Role, Message, Snowflake, MessageEmbed } from 'discord.js';
 import { GuildSettings } from '@lib/types/settings/GuildSettings';
+import { RichDisplay } from 'klasa';
+import { chunk } from '@klasa/utils';
 
 export default class extends SteveCommand {
 
@@ -35,17 +37,33 @@ export default class extends SteveCommand {
 	}
 
 	public async list(msg: KlasaMessage): Promise<Message> {
-		const assignable = msg.guild.settings.get(GuildSettings.Roles.Assignable) as Snowflake[];
-		if (assignable.length < 1) throw `This server does not have any self-assignable roles.`;
+		let assignables = msg.guild!.settings.get(GuildSettings.Roles.Assignable) as string[];
+		assignables = assignables.slice(); // clone to avoid mutating cache
 
-		let list = '';
-
-		for (let i = 0; i < assignable.length; i++) {
-			const role = msg.guild.roles.cache.get(assignable[i]);
-			list += `${role.name}\n`;
+		// make assignables into an array of role names
+		for (let i = 0; i < assignables.length; i++) {
+			const role = msg.guild!.roles.cache.get(assignables[i]);
+			if (role) assignables.splice(i, 1, role.name);
 		}
 
-		return msg.channel.send(list);
+		const response = await msg.send(new MessageEmbed()
+			.setDescription('Loading...')
+			.setColor(Colors.Pink));
+
+		const display = new RichDisplay(new MessageEmbed());
+
+		for (const page of chunk(assignables, 30)) {
+			const description = `\`${page.join('`, `')}\``;
+			display.addPage((embed: MessageEmbed) =>
+				embed.setDescription('Use `s;assign <role>` to assign or unassign a role')
+				.setTitle('Self Assign')
+				.addField('Avaliable Roles', description)
+				.setColor(Colors.Pink)
+			);
+		}
+
+		await display.run(response, { jump: false, time: 60 * 1000 });
+		return response;
 	}
 
 	public async assign(msg: KlasaMessage, assignableRoles: Role[]): Promise<Message> {
