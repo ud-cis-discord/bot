@@ -19,6 +19,8 @@ export default class extends Event {
 
 		const parent = msg.channel.parent ? msg.channel.parent.name : 'No Category';
 
+		const attachment = msg.attachments;
+
 		const embed = newEmbed()
 			.setAuthor(msg.author.tag, msg.author.displayAvatarURL())
 			.setColor(Colors.RedOrange)
@@ -27,6 +29,14 @@ export default class extends Event {
 			.addFields([
 				{ name: `Message Deleted in ${msg.channel.name} (${parent})`, value: msgContent }
 			]);
+
+		if(attachment.array().length > 0) {
+			let files: string[] = [];
+			attachment.forEach(att => {
+				files.push(att.name);
+			})
+			embed.addField('Files', files.join(', '));
+		}
 
 		return serverlog.send(embed);
 	}
