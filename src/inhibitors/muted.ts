@@ -1,5 +1,4 @@
-import { Inhibitor, InhibitorStore } from 'klasa';
-import { KlasaMessage } from 'klasa';
+import { Inhibitor, InhibitorStore, KlasaMessage } from 'klasa';
 import { GuildSettings } from '@lib/types/settings/GuildSettings';
 
 export default class extends Inhibitor {
@@ -12,4 +11,5 @@ export default class extends Inhibitor {
 		const muted = msg.guild.settings.get(GuildSettings.Roles.Muted);
 		if (msg.member.roles.cache.has(muted)) throw 'Muted perople cant use commands';
 	}
+
 }

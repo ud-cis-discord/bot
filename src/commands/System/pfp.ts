@@ -2,7 +2,6 @@ import { CommandStore, KlasaMessage } from 'klasa';
 import { ClientUser } from 'discord.js';
 import { SteveCommand } from '@lib/structures/commands/SteveCommand';
 import { PermissionLevels } from '@lib/types/enums';
-import { TUATARIA } from '@root/config';
 
 export default class extends SteveCommand {
 

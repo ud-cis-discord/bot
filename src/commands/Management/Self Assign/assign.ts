@@ -1,9 +1,8 @@
 import { SteveCommand } from '@lib/structures/commands/SteveCommand';
-import { CommandStore, KlasaMessage } from 'klasa';
+import { CommandStore, KlasaMessage, RichDisplay } from 'klasa';
 import { PermissionLevels, Emojis, Colors } from '@lib/types/enums';
 import { Role, Message, Snowflake, MessageEmbed } from 'discord.js';
 import { GuildSettings } from '@lib/types/settings/GuildSettings';
-import { RichDisplay } from 'klasa';
 import { chunk } from '@klasa/utils';
 
 export default class extends SteveCommand {
@@ -37,12 +36,12 @@ export default class extends SteveCommand {
 	}
 
 	public async list(msg: KlasaMessage): Promise<Message> {
-		let assignables = msg.guild!.settings.get(GuildSettings.Roles.Assignable) as string[];
+		let assignables = msg.guild!.settings.get(GuildSettings.Roles.Assignable) as string[]; // eslint-disable-line @typescript-eslint/no-non-null-assertion
 		assignables = assignables.slice(); // clone to avoid mutating cache
 
 		// make assignables into an array of role names
 		for (let i = 0; i < assignables.length; i++) {
-			const role = msg.guild!.roles.cache.get(assignables[i]);
+			const role = msg.guild!.roles.cache.get(assignables[i]); // eslint-disable-line @typescript-eslint/no-non-null-assertion
 			if (role) assignables.splice(i, 1, role.name);
 		}
 
@@ -56,9 +55,9 @@ export default class extends SteveCommand {
 			const description = `\`${page.join('`, `')}\``;
 			display.addPage((embed: MessageEmbed) =>
 				embed.setDescription('Use `s;assign <role>` to assign or unassign a role')
-				.setTitle('Self Assign')
-				.addField('Avaliable Roles', description)
-				.setColor(Colors.Pink)
+					.setTitle('Self Assign')
+					.addField('Avaliable Roles', description)
+					.setColor(Colors.Pink)
 			);
 		}
 

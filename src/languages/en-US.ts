@@ -1,5 +1,5 @@
 import { Language, LanguageStore, util } from 'klasa';
-import { NAME } from '@root/config'
+import { NAME } from '@root/config';
 
 export default class extends Language {
 

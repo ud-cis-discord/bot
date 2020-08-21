@@ -30,11 +30,11 @@ export default class extends Event {
 				{ name: `Message Deleted in ${msg.channel.name} (${parent})`, value: msgContent }
 			]);
 
-		if(attachment.array().length > 0) {
-			let files: string[] = [];
+		if (attachment.array().length > 0) {
+			const files: string[] = [];
 			attachment.forEach(att => {
 				files.push(att.name);
-			})
+			});
 			embed.addField('Files', files.join(', '));
 		}
 
