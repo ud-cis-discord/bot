@@ -35,8 +35,4 @@ export default class extends SteveCommand {
 		}
 	}
 
-	public async init(): Promise<this | void> {
-		if (!TUATARIA) return this.disable();
-	}
-
 }

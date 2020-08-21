@@ -21,11 +21,11 @@ export const enum Emojis {
 	RedX = '❌',
 	Empty = '⛔',
 	Skip = '⏭️',
-	Plus = '➕',
-	Minus = '➖',
-	StevePeace = '✔️',
-	SteveFaceLight = '✔️',
-	SteveFaceDark = '✔️'
+	Plus = '<:plus:746221362103713854>',
+	Minus = '<:minus:746221413727469619>',
+	StevePeace = '<:stevepeace:746223639770431578>',
+	SteveFaceLight = '<:facelightblue:746225859949756426>',
+	SteveFaceDark = '<:facedarkblue:746226114300477540>'
 }
 
 export const enum Events {
