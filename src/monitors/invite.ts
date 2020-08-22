@@ -10,9 +10,9 @@ export default class extends Monitor {
 	public async run(msg: KlasaMessage): Promise<Message | void> {
 		if (msg.channel instanceof TextChannel) {
 			if (msg.content.match(/(discord\.gg|discordapp\.com\/invite)\/(.+)/)) {
-				const spamMsg = await msg.delete();
+				const inviteMsg = await msg.delete();
 
-				spamMsg.reply(`please do not post server invites publicly.`);
+				inviteMsg.reply(`please do not post server invites publicly.`);
 			}
 		}
 
