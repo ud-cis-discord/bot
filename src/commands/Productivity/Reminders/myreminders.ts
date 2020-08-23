@@ -1,9 +1,10 @@
 import { SteveCommand } from '@lib/structures/commands/SteveCommand';
-import { CommandStore, KlasaMessage, ScheduledTask } from 'klasa';
-import { Message, ColorResolvable } from 'discord.js';
+import { CommandStore, KlasaMessage, ScheduledTask, RichDisplay } from 'klasa';
+import { Message, ColorResolvable, MessageEmbed } from 'discord.js';
 import { UserSettings } from '@lib/types/settings/UserSettings';
 import { Colors } from '@lib/types/enums';
 import { friendlyDuration, newEmbed } from '@lib/util/util';
+import { chunk } from '@klasa/utils';
 
 export default class extends SteveCommand {
 
@@ -50,24 +51,31 @@ export default class extends SteveCommand {
 		const targetUserReminders = await this.client.schedule.getUserReminders(msg.author.id);
 		if (targetUserReminders.length < 1) throw `You don't have any pending reminders!`;
 
-		const embed = newEmbed()
-			.attachFiles(['./assets/images/alarmclock.png'])
-			.setColor(msg.author.settings.get(UserSettings.EmbedColor) as ColorResolvable || Colors.YellowGreen)
-			.setFooter(`To cancel a reminder, do "s;reminders cancel|<reminder number>".`)
-			.setTitle('Pending Reminders')
-			.setThumbnail('attachment://alarmclock.png');
+		const response = await msg.send(new MessageEmbed()
+			.setDescription('Loading...')
+			.setColor(msg.author.settings.get(UserSettings.EmbedColor) as ColorResolvable || Colors.YellowGreen));
 
-		targetUserReminders.forEach((reminder: ScheduledTask) => {
-			const reminderDisplayContent = this.getReminderDisplayContent(msg, reminder);
+		const display = new RichDisplay(new MessageEmbed());
+		for (const page of chunk(targetUserReminders, 5)) {
+			const embed = newEmbed()
+				.setColor(msg.author.settings.get(UserSettings.EmbedColor) as ColorResolvable || Colors.YellowGreen)
+				.setDescription(`To cancel a reminder, do "s;reminders cancel|<reminder number>".`)
+				.setTitle('Pending Reminders')
+				.setThumbnail('https://raw.githubusercontent.com/ud-cis-discord/bot/prof/assets/images/alarmclock.png');
+			page.forEach((reminder: ScheduledTask) => {
+				const reminderDisplayContent = this.getReminderDisplayContent(msg, reminder);
 
-			embed
-				.addFields([
-					{ name: `**${targetUserReminders.indexOf(reminder) + 1}: ${reminderDisplayContent}**`,
-						value: `${friendlyDuration(reminder.time.getTime() - Date.now())} left!` }
-				]);
-		});
+				embed
+					.addFields([
+						{ name: `**${targetUserReminders.indexOf(reminder) + 1}: ${reminderDisplayContent}**`,
+							value: `${friendlyDuration(reminder.time.getTime() - Date.now())} left!` }
+					]);
+			});
+			display.addPage(embed);
+		}
 
-		return msg.channel.send(embed);
+		await display.run(response, { jump: false, time: 5 * 60 * 1000 });
+		return response;
 	}
 
 	private getReminderDisplayContent(msg: KlasaMessage, reminder: ScheduledTask): string {
