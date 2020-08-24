@@ -26,9 +26,16 @@ export default class extends Event {
 			.setColor(Colors.RedOrange)
 			.setFooter(`Message ID: ${msg.id} | Message sent ${msgSentTime} ago`)
 			.setTimestamp()
-			.addFields([
-				{ name: `Message Deleted in ${msg.channel.name} (${parent})`, value: msgContent }
-			]);
+			.setTitle(`Message Deleted in ${msg.channel.name} (${parent})`)
+			.setDescription(msg.content);
+
+		if (msg.edits.length > 1) {
+			const edits: string[] = [];
+			msg.edits.forEach(edit => {
+				edits.push(edit.content);
+			});
+			embed.addField('Edits', edits.join(', '));
+		}
 
 		if (attachment.array().length > 0) {
 			const files: string[] = [];
