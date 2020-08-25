@@ -1,4 +1,4 @@
-import { Inhibitor, InhibitorStore, KlasaMessage } from 'klasa';
+import { Inhibitor, KlasaMessage, InhibitorStore } from 'klasa';
 import { GuildSettings } from '@lib/types/settings/GuildSettings';
 
 export default class extends Inhibitor {
@@ -6,7 +6,6 @@ export default class extends Inhibitor {
 	public constructor(store: InhibitorStore, file: string[], directory: string) {
 		super(store, file, directory, { spamProtection: true });
 	}
-
 	public async run(msg: KlasaMessage): Promise<void> {
 		if (msg.channel.type === 'dm') return;
 

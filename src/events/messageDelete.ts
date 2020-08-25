@@ -27,7 +27,7 @@ export default class extends Event {
 			.setFooter(`Message ID: ${msg.id} | Message sent ${msgSentTime} ago`)
 			.setTimestamp()
 			.setTitle(`Message Deleted in ${msg.channel.name} (${parent})`)
-			.setDescription(msg.content);
+			.setDescription(msgContent);
 
 		if (msg.edits.length > 1) {
 			const edits: string[] = [];

@@ -1,4 +1,4 @@
-import { Inhibitor, InhibitorStore, KlasaMessage } from 'klasa';
+import { Inhibitor, KlasaMessage, InhibitorStore } from 'klasa';
 
 export default class extends Inhibitor {
 

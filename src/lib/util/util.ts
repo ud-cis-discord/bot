@@ -11,7 +11,7 @@ export function friendlyColonDuration(duration: number): string {
 }
 
 export function friendlyDuration(duration: number): string {
-	return prettyMilliseconds(duration, { compact: true, verbose: true });
+	return prettyMilliseconds(duration, { verbose: true });
 }
 
 export async function getExecutor(guild: Guild, type: GuildAuditLogsAction | number): Promise<User> {
