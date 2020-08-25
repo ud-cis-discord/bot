@@ -26,6 +26,7 @@ export default class extends SteveCommand {
 		' and Safety team, and potential University actions.',
 		'Keep your language appropriate- don\'t say something you wouldn\'t say to your professor.',
 		'Make sure to get yourself verified. Instructions on how to do so can be found on our website at https://ud-cis-discord.github.io/verify/',
+		'Rules for the course you are taking apply here. This includes rules about sharing code.',
 		'Respect what the Staff and Admins say, they are in charge for a reason. If they tell you to stop, then stop.',
 		'The UD Code of Conduct applies to all activity on this server. For more information refer to the following link:' +
 		' http://www1.udel.edu/stuguide/19-20/code.html',
