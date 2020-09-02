@@ -39,15 +39,15 @@ export default class extends SteveCommand {
 		let assignables = msg.guild!.settings.get(GuildSettings.Roles.Assignable) as string[]; // eslint-disable-line @typescript-eslint/no-non-null-assertion
 		assignables = assignables.slice(); // clone to avoid mutating cache
 
+		const response = await msg.send(new MessageEmbed()
+			.setDescription('Loading...')
+			.setColor(Colors.Pink));
+
 		// make assignables into an array of role names
 		for (let i = 0; i < assignables.length; i++) {
 			const role = msg.guild!.roles.cache.get(assignables[i]); // eslint-disable-line @typescript-eslint/no-non-null-assertion
 			if (role) assignables.splice(i, 1, role.name);
 		}
-
-		const response = await msg.send(new MessageEmbed()
-			.setDescription('Loading...')
-			.setColor(Colors.Pink));
 
 		const display = new RichDisplay(new MessageEmbed());
 
