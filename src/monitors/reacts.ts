@@ -8,7 +8,7 @@ export default class extends Monitor {
 	}
 
 	public async run(msg: KlasaMessage): Promise<MessageReaction | void> {
-		if ((msg.content.toLocaleLowerCase().includes('sage') && msg.content.toLocaleLowerCase().includes('thank'))) {
+		if (msg.content.toLocaleLowerCase().includes('sage') && msg.content.toLocaleLowerCase().includes('thank')) {
 			return msg.react('746236648282521711');
 		}
 		return;
