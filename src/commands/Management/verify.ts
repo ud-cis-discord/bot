@@ -13,13 +13,18 @@ export default class extends SteveCommand {
 			description: 'Get yourself verified',
 			examples: ['verify Ben Segal | bensegal@udel.edu | 702425559'],
 			extendedHelp: 'Provide your real name first, then your @udel.edu email, then your udid',
-			runIn: ['dm'],
+			runIn: ['dm', 'text'],
 			usage: '<name:string> <email:string> <udid:string>',
 			helpUsage: 'Name | Email | UDID'
 		});
 	}
 
 	public async run(msg: KlasaMessage, [name, email, udid]: [string, string, string]): Promise<Message> {
+		if (msg.channel instanceof TextChannel) {
+			msg.delete();
+			return msg.reply('Please send your verification infomation to me directly in a DM. For more information <https://ud-cis-discord.github.io/verify/>.');
+		}
+
 		const udcis = this.client.guilds.cache.get('744982373300437627');
 		if (!udcis.members.cache.has(msg.author.id)) throw 'You must be a member of the UDCIS Server to use this command!';
 		if (!email.endsWith('@udel.edu')) throw `${email} is not a valid udel.edu email address`;
