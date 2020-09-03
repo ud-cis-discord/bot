@@ -30,7 +30,7 @@ export default class extends SteveCommand {
 	}
 
 	public async run(msg: KlasaMessage, [role]: [Role]): Promise<Message> {
-		let membersList = role.members.map(m => m.user.username).join(', ');
+		let membersList = role.members.map(m => m.user.username).sort().join(', ');
 		membersList = membersList.length < 1 ? 'No members in this role.'
 			: membersList.length > 1024 ? 'There\'s too many members in this role to display.' : membersList;
 

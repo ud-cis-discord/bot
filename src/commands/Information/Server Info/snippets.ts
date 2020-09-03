@@ -71,7 +71,7 @@ export default class extends SteveCommand {
 		const snips: Snippet[] = msg.guild.settings.get(GuildSettings.Snippets);
 		if (snips.length < 1) throw 'This server has no snippets to list.';
 
-		return msg.channel.send(`${snips.map(s => s.name).join('\n')}`);
+		return msg.channel.send(`${snips.map(s => s.name).sort().join('\n')}`);
 	}
 
 }
