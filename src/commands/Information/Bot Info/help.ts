@@ -60,7 +60,7 @@ export default class extends SteveCommand {
 			if (Array.isArray(examples)) {
 				const helpExamples = [];
 				for (let i = 0; i < examples.length; i++) {
-					helpExamples.push(`>> Steve, ${examples[i]}`);
+					helpExamples.push(`>> ${NAME}, ${examples[i]}`);
 				}
 
 				embed.addFields({ name: `${Emojis.SteveFaceDark} | *Examples*`, value: helpExamples.join('\n') });

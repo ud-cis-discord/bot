@@ -3,6 +3,7 @@ import { CommandStore, KlasaMessage } from 'klasa';
 import { Message, TextChannel } from 'discord.js';
 import { GuildSettings } from '@lib/types/settings/GuildSettings';
 import { friendlyDuration } from '@lib/util/util';
+import { NAME } from '@root/config';
 
 export default class extends SteveCommand {
 
@@ -11,7 +12,7 @@ export default class extends SteveCommand {
 			aliases: ['remindme'],
 			description: 'Set personal reminders for yourself.',
 			examples: ['remind make steve suck less|1 hour'],
-			extendedHelp: 'If you set a reminder in a DM with Steve, he will remind you in the DM.',
+			extendedHelp: `If you set a reminder in a DM with ${NAME}, the reminder will be in the DM.`,
 			usage: '<reminder:string{,140}> <duration:timespan>',
 			helpUsage: 'what | when'
 		});
