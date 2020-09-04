@@ -22,6 +22,8 @@ export default class extends SteveCommand {
 	public async run(msg: KlasaMessage, [name, email, udid]: [string, string, string]): Promise<Message> {
 		if (msg.channel instanceof TextChannel) {
 			msg.delete();
+			msg.author.send('Send the verify command here.')
+			.catch(() => { /*noop*/ });
 			return msg.reply('Please send your verification infomation to me directly in a DM. For more information <https://ud-cis-discord.github.io/verify/>.');
 		}
 
