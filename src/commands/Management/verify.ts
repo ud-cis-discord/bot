@@ -23,7 +23,7 @@ export default class extends SteveCommand {
 		if (msg.channel instanceof TextChannel) {
 			msg.delete();
 			msg.author.send('Send the verify command here.')
-			.catch(() => { /*noop*/ });
+				.catch(() => { /* noop */ });
 			return msg.reply('Please send your verification infomation to me directly in a DM. For more information <https://ud-cis-discord.github.io/verify/>.');
 		}
 
