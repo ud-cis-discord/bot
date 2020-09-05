@@ -23,10 +23,12 @@ export default class extends SteveCommand {
 		let buff = 'Name,Display name,Messages sent,Email,UDID,Roles\n';
 		levels.forEach(level => {
 			const member = msg.guild.members.cache.get(level.user);
-			buff += `${member.user.settings.get(UserSettings.Details.Name)},${member.displayName},${level.level},` +
-			`${member.user.settings.get(UserSettings.Details.Email)},${member.user.settings.get(UserSettings.Details.UDID)},"`;
-			msg.guild.members.cache.get(level.user).roles.cache.array().forEach(role => { buff += `${role.name}, `; });
-			buff += '"\n';
+			if (member) {
+				buff += `${member.user.settings.get(UserSettings.Details.Name)},${member.displayName},${level.level},` +
+				`${member.user.settings.get(UserSettings.Details.Email)},${member.user.settings.get(UserSettings.Details.UDID)},"`;
+				msg.guild.members.cache.get(level.user).roles.cache.array().forEach(role => { buff += `${role.name}, `; });
+				buff += '"\n';
+			}
 		});
 
 		return msg.channel.sendFile(Buffer.from(buff), `export_${formatDate(Date.now(), 'M-D-YY_HH-mm-ss')}.csv`, 'Don\'t forget to reset all levels');

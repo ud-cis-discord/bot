@@ -15,10 +15,12 @@ export default class extends Task {
 		let buff = 'Name,Display name,Messages sent,Email,UDID,Roles\n';
 		levels.forEach(level => {
 			const member = _guild.members.cache.get(level.user);
-			buff += `${member.user.settings.get(UserSettings.Details.Name)},${member.displayName},${level.level},` +
-			`${member.user.settings.get(UserSettings.Details.Email)},${member.user.settings.get(UserSettings.Details.UDID)},"`;
-			_guild.members.cache.get(level.user).roles.cache.array().forEach(role => { buff += `${role.name}, `; });
-			buff += '"\n';
+			if (member) {
+				buff += `${member.user.settings.get(UserSettings.Details.Name)},${member.displayName},${level.level},` +
+				`${member.user.settings.get(UserSettings.Details.Email)},${member.user.settings.get(UserSettings.Details.UDID)},"`;
+				_guild.members.cache.get(level.user).roles.cache.array().forEach(role => { buff += `${role.name}, `; });
+				buff += '"\n';
+			}
 		});
 		const out = _channel.sendFile(Buffer.from(buff), `export_${formatDate(Date.now(), 'M-D-YY_HH-mm-ss')}.csv`, 'All levels have been reset');
 		await _guild.settings.reset(GuildSettings.Levels);
