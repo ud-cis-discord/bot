@@ -15,9 +15,8 @@ export default class extends SteveCommand {
 
 	public async run(msg: KlasaMessage): Promise<Message> {
 		const embed = newEmbed()
-			.setColor(Colors.YellowGreen)
-			.setTitle('Statistics')
-			.setThumbnail(this.client.user.displayAvatarURL())
+			.setColor(Colors.MidnightGreen)
+			.setAuthor(`${this.client.user.username} Stats`, this.client.user.displayAvatarURL())
 			.setTimestamp(Date.now())
 			.addFields([
 				{ name: 'Uptime', value: Duration.toNow(Date.now() - (process.uptime() * 1000)), inline: true },
