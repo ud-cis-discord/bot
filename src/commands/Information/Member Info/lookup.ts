@@ -1,6 +1,6 @@
 import { SteveCommand } from '@lib/structures/commands/SteveCommand';
 import { CommandStore, KlasaMessage } from 'klasa';
-import { Message, GuildMember } from 'discord.js';
+import { Message, GuildMember, MessageEmbed } from 'discord.js';
 import { PermissionLevels } from '@lib/types/enums';
 import { GuildSettings } from '@lib/types/settings/GuildSettings';
 import { Levels } from '@lib/types/levels';
@@ -14,25 +14,38 @@ export default class extends SteveCommand {
 			description: 'Looks up a users verification information and message count.',
 			requiredPermissions: PermissionLevels.MODERATOR,
 			runIn: ['text'],
-			usage: '<targetMember:membername>',
-			helpUsage: 'member'
+			usage: '<member:membername|udid:string>',
+			helpUsage: '<member|udid>',
+			extendedHelp: 'Alows moderaters to look up info using either a udid or a discord account',
+			examples: ['lookup Ben855', 'lookup 702425559']
 		});
 	}
 
-	public async run(msg: KlasaMessage, [targetMember]: [GuildMember]): Promise<Message> {
-		if (!targetMember) throw `You must provide either a valid member's name, their long ID, or tag them.`;
-		const fetchedMember = await msg.guild.members.fetch(targetMember);
+	public async run(msg: KlasaMessage, [person]: [string | GuildMember]): Promise<Message> {
+		let targetMember: GuildMember;
+		if (typeof person === 'string') {
+			msg.guild.members.cache.each(mem => {
+				if (mem.user.settings.get('details.udid') === person) targetMember = mem;
+			});
+		} else {
+			targetMember = await msg.guild.members.fetch(person);
+		}
 
+		if (targetMember) return msg.channel.send(await this.buildEmbed(msg, targetMember));
+		return msg.channel.send('You must provide either a valid member\'s UDID, username, their long ID, or tag them.');
+	}
+
+	private async buildEmbed(msg: KlasaMessage, member: GuildMember): Promise <MessageEmbed> {
 		const levels: Levels[] = msg.guild.settings.get(GuildSettings.Levels);
-		const hasLevel = !(levels.filter(level => level.user === fetchedMember.id).length === 0);
-		const name = fetchedMember.user.settings.get(UserSettings.Details.Name);
-		const email = fetchedMember.user.settings.get(UserSettings.Details.Email);
-		const udid = fetchedMember.user.settings.get(UserSettings.Details.UDID);
+		const hasLevel = !(levels.filter(level => level.user === member.id).length === 0);
+		const name = member.user.settings.get(UserSettings.Details.Name);
+		const email = member.user.settings.get(UserSettings.Details.Email);
+		const udid = member.user.settings.get(UserSettings.Details.UDID);
 
 		const embed = newEmbed()
-			.setAuthor(fetchedMember.user.tag, fetchedMember.user.displayAvatarURL())
+			.setAuthor(member.user.tag, member.user.displayAvatarURL())
 			.setTimestamp(Date.now())
-			.setFooter(`Discord ID ${fetchedMember.id}`);
+			.setFooter(`Discord ID ${member.id}`);
 
 		if (!(name === null && email === null && udid === null)) {
 			embed.addFields([
@@ -44,14 +57,13 @@ export default class extends SteveCommand {
 			embed.setDescription('This user has not yet been verified');
 		}
 
-
 		if (hasLevel) {
-			embed.addField('Message Count', levels[levels.slice().map(level => level.user).indexOf(fetchedMember.id)].level, true);
+			embed.addField('Message Count', levels[levels.slice().map(level => level.user).indexOf(member.id)].level, true);
 		} else {
 			embed.addField('Message Count', 'This user has sent no messages', true);
 		}
 
-		return msg.channel.send(embed);
+		return embed;
 	}
 
 }
