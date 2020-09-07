@@ -19,6 +19,7 @@ export default class extends SteveCommand {
 	}
 
 	public async run(msg: KlasaMessage): Promise<Message> {
+		msg.guild.members.fetch();
 		const levels: Levels[] = msg.guild.settings.get(GuildSettings.Levels);
 		let buff = 'Name,Display name,Messages sent,Email,UDID,Roles\n';
 		levels.forEach(level => {
