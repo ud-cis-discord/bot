@@ -48,6 +48,7 @@ export default class extends SteveCommand {
 			.setAuthor(msg.author.tag, msg.author.displayAvatarURL())
 			.setColor(Colors.Orange)
 			.setTitle(`${msg.author.tag} has been verified`)
+			.setTimestamp(Date.now())
 			.addFields([
 				{ name: 'Name', value: name, inline: true },
 				{ name: 'Email', value: email, inline: true },
