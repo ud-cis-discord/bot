@@ -26,5 +26,6 @@ export default Client.defaultGuildSchema
 	.add('maxMentions', 'Integer', { default: 25 })
 	.add('moderationCases', 'any', { array: true, configurable: false })
 	.add('snippets', 'any', { array: true })
+	.add('rewards', 'any', { array: true })
 	.add('wordBlacklist', 'Boolean', { default: true })
 	.add('levels', 'any', { array: true });
