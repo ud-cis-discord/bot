@@ -19,7 +19,7 @@ export default class extends SteveCommand {
 		});
 	}
 
-	public async run (msg :KlasaMessage, [role, channel, threshold, message]: [Role, TextChannel, number, string]): Promise<Message> {
+	public async run(msg: KlasaMessage, [role, channel, threshold, message]: [Role, TextChannel, number, string]): Promise<Message> {
 		const newReward: Reward = { roleID: role.id, channelID: channel.id, msgCount: threshold, displayMessage: message };
 		const rewards: Reward[] = msg.guild.settings.get(GuildSettings.Rewards);
 		if (rewards.filter(r => r.channelID === newReward.channelID).length > 0) throw `There is already a reward for ${channel.name}!`;
@@ -34,9 +34,10 @@ export default class extends SteveCommand {
 				{ name: 'Role', value: role, inline: true },
 				{ name: 'Threshold', value: threshold, inline: true },
 				{ name: 'Display message', value: message }
-			)
+			);
 
 		return msg.channel.send(embed);
 	}
+
 }
 
