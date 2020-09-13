@@ -11,6 +11,7 @@ export namespace GuildSettings {
 	export const Snippets = 'snippets';
 	export const WordBlacklist = 'wordBlacklist';
 	export const Levels = 'levels';
+	export const Rewards = 'rewards';
 
 	export namespace Channels {
 		export const Memberlog = 'channels.memberlog';
