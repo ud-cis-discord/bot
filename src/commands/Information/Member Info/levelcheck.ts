@@ -18,7 +18,9 @@ export default class extends SteveCommand {
 		const levels: Levels[] = msg.guild.settings.get(GuildSettings.Levels);
 		if (levels.filter(level => level.user === msg.author.id).length === 0) {
 			return msg.channel.send('It looks like you have\'t sent any messages');
-		} return msg.channel.send(`You have sent ${levels[levels.slice().map(level => level.user).indexOf(msg.author.id)].level} messages`);
+		}
+		const msgNum = levels[levels.slice().map(level => level.user).indexOf(msg.author.id)].level;
+		return msg.channel.send(`You have sent ${msgNum} message${msgNum === 1? '' : 's'}.`);
 	}
 
 }
