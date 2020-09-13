@@ -120,9 +120,9 @@ export default class extends Language {
 			COMMAND_INVITE_DESCRIPTION: 'Displays the invite link of the bot, to invite it to your guild.',
 			COMMAND_INFO: [
 				`${NAME} is a bot built on top of the Klasa framework and the Discord.js library.`,
-				'The bot is custom-coded and is actively maintained by Ben Segal and biased on Steve Bot.',
+				'The bot is custom-coded and is actively maintained by Ben Segal and biased on SteveBot.',
 				'',
-				'Some features of Steve include:',
+				'Some features of Sage include:',
 				'• ↩️  Self-assignable roles',
 				'• 👀  A word restriced list to catch a limited amount of rule-breaking terms',
 				'• ⏰  Reminders in case — OH MY GOD IT\'S BURNING',
