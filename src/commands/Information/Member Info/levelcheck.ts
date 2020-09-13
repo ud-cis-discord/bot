@@ -20,7 +20,7 @@ export default class extends SteveCommand {
 			return msg.channel.send('It looks like you have\'t sent any messages');
 		}
 		const msgNum = levels[levels.slice().map(level => level.user).indexOf(msg.author.id)].level;
-		return msg.channel.send(`You have sent ${msgNum} message${msgNum === 1? '' : 's'}.`);
+		return msg.channel.send(`You have sent ${msgNum} message${msgNum === 1 ? '' : 's'}.`);
 	}
 
 }
