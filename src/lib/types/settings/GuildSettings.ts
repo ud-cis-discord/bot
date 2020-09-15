@@ -34,6 +34,8 @@ export namespace GuildSettings {
 		export const NoLevels = 'roles.noLevels';
 		export const PowerUser = 'roles.powerUser';
 		export const PowerUserLimit = 'roles.powerUserLimit';
+		export const ProdMaster = 'roles.prodMaster';
+		export const ProdMasterLimit = 'roles.prodMasterLimit';
 	}
 
 	export namespace Music {
