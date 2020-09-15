@@ -15,9 +15,10 @@ export default class extends SteveCommand {
 	}
 
 	public async run(msg: KlasaMessage): Promise<Message | void> {
-		const invite = await msg.guild.systemChannel.createInvite({ maxAge: 24 * 60 * 60, maxUses: 1, unique: true });
+		const invite = await msg.guild.systemChannel.createInvite({ maxAge: 24 * 60 * 60, maxUses: 1, unique: true, reason: `Requested by ${msg.author.tag}` });
 
-		return msg.author.send(`Here is the invite link you requested. It has one use and expires in 24 hours:\nhttps://discord.gg/${invite.code}`)
+		return msg.author.send('Here is the invite link you requested. It has one use and expires in 24 hours:\n'+ 
+		`\`https://discord.gg/${invite.code} Make sure to get verified https://ud-cis-discord.github.io/verify/students/\``)
 			.then(() => { msg.channel.send('An invite link has been sent to your DM\'s'); })
 			.catch(() => { msg.channel.send('❌ | You have DMs disabled, I couldn\'t send you the link in DMs.'); });
 	}
