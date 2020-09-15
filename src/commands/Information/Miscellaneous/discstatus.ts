@@ -29,7 +29,7 @@ export default class extends SteveCommand {
 				// do something with JSON, using the 'body' variable
 				const embed = newEmbed()
 					.setTitle(body.status.description)
-					.setDescription('[Discord Status](https://discordstatus.com/)')
+					.setDescription(`[Discord Status](https://discordstatus.com/)\n**Current Incident:**\n${body.status.indicator}`)
 					.addFields(body.components.map(component => ({
 						name: component.name,
 						value: component.status,
