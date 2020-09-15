@@ -19,10 +19,13 @@ export default class extends SteveCommand {
 	}
 
 	public async run(msg: KlasaMessage, [reminder, duration]: [string, number]): Promise<Message> {
-		// const userReminders = await this.client.schedule.getUserReminders(msg.author.id);
-		// if (userReminders.length > 25) {
-		// 	throw 'There\'s a maximum of 25 reminders... and you\'ve got 25.';
-		// }
+		const userReminders = await this.client.schedule.getUserReminders(msg.author.id);
+		const prodRole = await msg.guild.settings.get(GuildSettings.Roles.ProdMaster);
+		const prodLimit = await msg.guild.settings.get(GuildSettings.Roles.ProdMasterLimit);
+		if (prodRole && userReminders.length >= prodLimit - 1 && !msg.member.roles.cache.has(prodRole)) {
+			msg.member.roles.add(prodRole);
+			msg.reply('someone is being productive! You are now a Productivity Master!');
+		}
 
 		const reminderChannel = msg.guild ? msg.guild.settings.get(GuildSettings.Channels.ReminderChannel) : null;
 
