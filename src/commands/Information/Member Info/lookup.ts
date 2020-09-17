@@ -12,7 +12,7 @@ export default class extends SteveCommand {
 	public constructor(store: CommandStore, file: string[], directory: string) {
 		super(store, file, directory, {
 			description: 'Looks up a users verification information and message count.',
-			requiredPermissions: PermissionLevels.MODERATOR,
+			permissionLevel: PermissionLevels.MODERATOR,
 			runIn: ['text'],
 			usage: '<member:membername|udid:string>',
 			helpUsage: '<member|udid>',
