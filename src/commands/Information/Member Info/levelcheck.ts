@@ -8,8 +8,8 @@ export default class extends SteveCommand {
 
 	public constructor(store: CommandStore, file: string[], directory: string) {
 		super(store, file, directory, {
-			description: 'Lets you check your level',
-			aliases: ['check'],
+			description: 'Lets you check how many messages you have sent',
+			aliases: ['check', 'count'],
 			runIn: ['text']
 		});
 	}
