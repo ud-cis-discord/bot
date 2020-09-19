@@ -25,7 +25,7 @@ export default class extends SteveCommand {
 		levels.forEach(level => {
 			const member = msg.guild.members.cache.get(level.user);
 			if (member) {
-				buff += `${member.user.settings.get(UserSettings.Details.Name)},${member.displayName},${level.level},` +
+				buff += `${member.user.settings.get(UserSettings.Details.Name)},${member.displayName.replace(/,/g, '.')},${level.level},` +
 				`${member.user.settings.get(UserSettings.Details.Email)},${member.user.settings.get(UserSettings.Details.UDID)},"`;
 				msg.guild.members.cache.get(level.user).roles.cache.array().forEach(role => { buff += `${role.name}, `; });
 				buff += '"\n';
