@@ -20,7 +20,9 @@ export default class extends SteveCommand {
 			reports.forEach(rep => rep.delete());
 		}
 
-		this.client.schedule.create('report', '0 4 * * SAT', { data: { channel: msg.channel.id } });
+		// cron string for during DST '0 4 * * SAT'
+		// cron string for no DST '0 5 * * SAT'
+		this.client.schedule.create('report', '0 5 * * SAT', { data: { channel: msg.channel.id } });
 		return msg.channel.send('Setting this channel as where reports will be automaticly sent.');
 	}
 
