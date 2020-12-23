@@ -6,7 +6,8 @@ export default Client.defaultGuildSchema
 		.add('modlog', 'TextChannel')
 		.add('reminderChannel', 'TextChannel')
 		.add('serverlog', 'TextChannel')
-		.add('noLevels', 'TextChannel', { array: true }))
+		.add('noLevels', 'TextChannel', { array: true })
+		.add('archive', 'CategoryChannel'))
 	.add('roles', roles => roles
 		.add('administrator', 'Role')
 		.add('assignable', 'Role', { array: true })
