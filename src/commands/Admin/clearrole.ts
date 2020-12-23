@@ -17,6 +17,7 @@ export default class extends SteveCommand {
 
 	public async run(msg: KlasaMessage, [role]: [Role]): Promise<Message> {
 		const res = await msg.channel.send('<a:loading:755121200929439745> Working...');
+		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 		await msg.guild!.members.fetch();
 		const { size } = role.members;
 
